@@ -1,24 +1,20 @@
-let menuSection = "";
-console.log("Hello");
+var path = window.location.pathname;
+var page = path.split("/").slice(-2, -1);
   function getRandomColor() { //generates light colors.
             color = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
             return color;
         }
-  function menuBorder(menuType){  //function used to only change border of menu clicked on, function called in php of corr. page.
-    menuSection = menuType;
-    $(menuType).css("border-top-color", getRandomColor());
-    $(menuType).css("borderWidth", "5px");
-  }
+$(".active a").css("border-top-color", getRandomColor());
 
   $(".nav-link").hover(function () {
-    if('#' + this.id !== menuSection){;
+    if(this.textContent.toUpperCase() !== page.toString().toUpperCase()) {
       $(this).css("border-top-color", getRandomColor());
       $(this).stop().animate({ //executes this while hovering
 
         borderWidth: "5px", //increase width of border
       }, 200);}
   }, function () { //executes when done hovering
-    if("#" + this.id !== menuSection){
+    if(this.textContent.toUpperCase() !== page.toString().toUpperCase()) {
       $(this).stop().animate({
         borderWidth: "0px", //decrease width of border
       }, 200);}
@@ -57,5 +53,12 @@ $(this).css("background-color", "#80BDFF");
         // $(".navbar").css("margin-top", "-80px");
 
       }
+    });
+  });
+  jQuery(function() {
+    $(document).ready(function() {
+      // get current URL path and assign 'active' class
+      var pathname = window.location.pathname;
+      $('.nav-custom > li > a[href="' + pathname + '"]').addClass('active');
     });
   });

@@ -13,6 +13,8 @@ function bttg_resources() {
      wp_enqueue_script('bootstrap.min.js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js' );
 
 }
+// Register Nav Walker class_alias
+require_once('class-wp-bootstrap-navwalker.php');
 
 add_action('wp_enqueue_scripts', 'bttg_resources');
 

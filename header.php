@@ -30,25 +30,18 @@
             </button>
             <div class="d-md-none collapseHeader"><?php bloginfo('name'); ?></div>
 
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <?php  $menuLocations = get_nav_menu_locations(); // Get our nav locations (set in our theme, usually functions.php)
-                                           // This returns an array of menu locations ([LOCATION_NAME] = MENU_ID);
-                                           
-                    $menuID = $menuLocations['primary']; // Get the *primary* menu ID
-
-                    $primaryNav = wp_get_nav_menu_items($menuID);
-                    foreach ( $primaryNav as $navItem ) { ?>
-
-                <ul class = "navbar-nav">
-
-                <?php
-
-                    echo '<li class="nav-item"><a class="nav-link" id="menuSectionColor1"href="'.$navItem->url.'" title="'.$navItem->title.'">'.$navItem->title.'</a></li>';
-                    
-                }?>
-
-                </ul>
-            </div>
+            <?php
+        wp_nav_menu( array(
+            'theme_location'    => 'primary',
+            'depth'             => 2,
+            'container'         => 'div',
+            'container_class'   => 'collapse navbar-collapse justify-content-center',
+            'container_id'      => 'bs-example-navbar-collapse-1',
+            'menu_class'        => 'nav navbar-nav nav-custom',
+            'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+            'walker'            => new WP_Bootstrap_Navwalker(),
+        ) );
+        ?>
         </nav>
 
      </div>
